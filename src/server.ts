@@ -10,7 +10,7 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, TypeScript with Express!');
+  res.json({name:"Thawitchai"});
 });
 
 // Start server
