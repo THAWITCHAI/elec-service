@@ -21,12 +21,12 @@
   },
   "homepage": "https://github.com/THAWITCHAI/elec-service#readme",
   "dependencies": {
-    "@prisma/client": "^6.1.0",
     "@vercel/node": "^5.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.2"
   },
   "devDependencies": {
+    "@prisma/client": "^6.1.0",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.5",
