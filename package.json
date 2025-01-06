@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/THAWITCHAI/elec-service#readme",
   "dependencies": {
+    "@vercel/node": "^5.0.2",
     "cors": "^2.8.5",
     "express": "^4.21.2"
   },
