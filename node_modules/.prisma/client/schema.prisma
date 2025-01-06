@@ -5,10 +5,6 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 // npx prisma migrate dev --name init
 
-// import { PrismaClient } from '@prisma/client'
-
-// const prisma = new PrismaClient()
-
 generator client {
   provider = "prisma-client-js"
 }
