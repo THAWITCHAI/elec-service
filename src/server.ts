@@ -10,10 +10,12 @@ app.use(express.json());
 
 // Routes
 app.get('/', (req: Request, res: Response) => {
-  res.json({name:"Thawitchai"});
+    res.json({ name: "Thawitchai" });
 });
 
 // Start server
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`Server is running at http://localhost:${PORT}`);
 });
+
+export = app;

@@ -2,9 +2,9 @@
   "name": "elec-service",
   "version": "1.0.0",
   "description": "",
-  "main": "server.ts",
+  "main": "server.js",
   "scripts": {
-    "start": "node src/server.ts",
+    "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
     "build": "tsc"
   },
