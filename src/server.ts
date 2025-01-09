@@ -57,6 +57,7 @@ app.post('/register', (req: Request, res: Response, next: NextFunction) => {
     } = req.body
 
     const hash = await bcypt_password.hash_password(data.password)
+    console.log(hash)
 
     const user = await prisma.user.create(
       {
