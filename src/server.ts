@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 const app = express();
 const PORT = process.env.PORT || 4000;
 import { PrismaClient } from '@prisma/client'
@@ -6,7 +6,17 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 // Define a route
-app.get("/electric", async (req: Request, res: Response) => {
+app.get("/electric", (req: Request, res: Response, next: NextFunction) => {
+  try {
+    if(req.headers.API_KEY){
+      next()
+    }else{
+      res.json({message:'No Key'})
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}, async (req: Request, res: Response) => {
   try {
     const electric = await prisma.electric.findMany()
     res.json(electric);
