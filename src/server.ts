@@ -9,6 +9,7 @@ const prisma = new PrismaClient()
 app.get("/electric", async (req: Request, res: Response) => {
   try {
     const electric = await prisma.electric.findMany()
+    console.log(electric)
     res.json(electric);
   } catch (error) {
     console.log(error)
