@@ -8,7 +8,9 @@ const prisma = new PrismaClient()
 // Define a route
 app.get("/electric", (req: Request, res: Response, next: NextFunction) => {
   try {
-    if(req.headers.API_KEY){
+    const {api_key} = req.headers
+    console.log(req.headers)
+    if(api_key==='1234'){
       next()
     }else{
       res.json({message:'No Key'})
