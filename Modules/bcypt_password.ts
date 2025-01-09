@@ -4,7 +4,10 @@ const hash_password = async (password: string) => {
     return hash
 }
 
-const compare_password = () => {
+const compare_password = (password: string, password_hash: string) => {
+    bcrypt.compare(password, password_hash, function (err, result) {
+        result == true
+    });
     return
 }
 

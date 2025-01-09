@@ -1,7 +1,7 @@
 import express, { NextFunction, Request, Response } from "express";
 import cors from 'cors'
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
 import { PrismaClient } from '@prisma/client'
 import bcypt_password from "../Modules/bcypt_password";
 
@@ -47,7 +47,7 @@ app.post('/register', (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     console.log(error)
   }
-}, async(req: Request, res: Response) => {
+}, async (req: Request, res: Response) => {
   try {
     const data: {
       "fname": string,
@@ -58,9 +58,13 @@ app.post('/register', (req: Request, res: Response, next: NextFunction) => {
 
     const hash = await bcypt_password.hash_password(data.password)
 
-    // const user = await prisma.
+    const user = await prisma.user.create(
+      {
+        data: Object.assign(data, { password: hash })
+      }
+    )
 
-    res.status(200).json(Object.assign(data,{password:hash}))
+    res.status(200).json(user)
   } catch (error) {
     console.log(error)
     res.json({ message: 'Error' })
