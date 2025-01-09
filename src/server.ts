@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 const app = express();
-const { PORT } = process.env;
+const PORT = process.env.PORT || 4000;
 import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()

@@ -1,10 +1,10 @@
 {
   "name": "elec-service",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "dev": "nodemon src/server.ts"
+},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/THAWITCHAI/elec-service.git"
@@ -21,13 +21,15 @@
   "dependencies": {
     "@prisma/client": "^6.2.1",
     "cors": "^2.8.5",
-    "express": "^4.21.2",
-    "nodemon": "^3.1.9"
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.5",
+    "nodemon": "^3.1.9",
     "prisma": "^6.2.1",
+    "ts-node": "^10.9.2",
     "tsx": "^4.19.2",
     "typescript": "^5.7.3"
   }
