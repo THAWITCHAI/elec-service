@@ -19,3 +19,11 @@ model electric {
   before Float
   after  Float
 }
+
+model user {
+  id       Int     @id @default(autoincrement())
+  fname    String?
+  lname    String?
+  email    String? @unique
+  password String?
+}
