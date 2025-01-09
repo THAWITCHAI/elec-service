@@ -20,7 +20,7 @@ model electric {
   after  Float
 }
 
-model user {
+model Users {
   id       Int     @id @default(autoincrement())
   fname    String?
   lname    String?
