@@ -36,6 +36,29 @@ app.get("/electric", (req: Request, res: Response, next: NextFunction) => {
     })
   }
 });
+app.get("/user", (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { api_key } = req.headers
+    console.log(req.headers)
+    if (api_key === '1234') {
+      next()
+    } else {
+      res.json({ message: 'No Key' })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}, async (req: Request, res: Response) => {
+  try {
+    const user = await prisma.user.findMany()
+    res.json(user);
+  } catch (error) {
+    console.log(error)
+    res.status(200).json({
+      message: 'Error'
+    })
+  }
+});
 
 app.post('/register', (req: Request, res: Response, next: NextFunction) => {
   try {
