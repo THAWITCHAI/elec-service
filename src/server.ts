@@ -39,7 +39,6 @@ app.get("/electric", (req: Request, res: Response, next: NextFunction) => {
 app.get("/user", (req: Request, res: Response, next: NextFunction) => {
   try {
     const { api_key } = req.headers
-    console.log(req.headers)
     if (api_key === '1234') {
       next()
     } else {
