@@ -4,6 +4,7 @@ const app = express();
 const PORT = 4000;
 import { PrismaClient } from '@prisma/client'
 import bcypt_password from "../Modules/bcypt_password";
+import sign_token from "../Modules/generate_token";
 
 const prisma = new PrismaClient()
 
@@ -65,7 +66,16 @@ app.post('/register', (req: Request, res: Response, next: NextFunction) => {
       }
     )
 
-    res.status(200).json(user)
+    const token_data = await sign_token(
+      {
+        fname: user.fname,
+        email: user.email,
+        lname: user.lname,
+        id: user.id,
+      }
+    )
+
+    res.status(200).json({token_data})
   } catch (error) {
     console.log(error)
     res.json({ message: 'Error' })
