@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken"
 
-export function decode(token: string) {
+export async function decode(token: string) {
     try {
-        const data_token = jwt.verify(token, 'shhhhh', { algorithms: ['HS256'] })
+        const data_token = await jwt.verify(token, 'shhhhh', { algorithms: ['HS256'] })
         console.log(data_token)
         return data_token
     } catch (error) {

@@ -4,7 +4,7 @@ const app = express();
 const PORT = 4000;
 import { PrismaClient } from '@prisma/client'
 import bcypt_password from "../Modules/bcypt_password";
-import { encode } from "../Modules/gentoken";
+import { decode, encode } from "../Modules/gentoken";
 
 const prisma = new PrismaClient()
 
@@ -103,6 +103,46 @@ app.post('/register', (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: 'Error' })
   }
 })
+app.post('/gentoken', (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { api_key } = req.headers
+    if (api_key === '1234') {
+      next()
+    } else {
+      res.json({ message: 'No Key' })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}, async (req: Request, res: Response) => {
+  try {
+    const {is_token} = req.body
+    if(is_token==null) return
+    console.log(is_token)
+
+    const token =await decode(is_token)
+    // console.log(token)
+
+
+    // const user = await prisma.user.findMany()
+    // console.log(user)
+
+    // const token_data = encode(
+    //   {
+    //     fname: user.fname,
+    //     email: user.email,
+    //     lname: user.lname,
+    //     id: user.id,
+    //   }
+    // )
+
+    res.status(200).json({ token })
+  } catch (error) {
+    console.log(error)
+    res.json({ message: 'Error' })
+  }
+})
+
 
 // Start the server
 app.listen(PORT, () => {
