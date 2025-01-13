@@ -11,7 +11,7 @@ export async function decode(token: string) {
     }
 }
 export const encode = (data: any) => {
-    const token = jwt.sign({ token: data }, 'shhhhh', { algorithm: 'HS256' })
+    const token = jwt.sign({ token: data }, 'shhhhh', { algorithm: 'HS256' ,expiresIn:'24h'})
     console.log(token)
     return token
 }

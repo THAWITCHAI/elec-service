@@ -103,6 +103,51 @@ app.post('/register', (req: Request, res: Response, next: NextFunction) => {
     res.json({ message: 'Error' })
   }
 })
+app.post('/login', (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { api_key } = req.headers
+    if (api_key === '1234') {
+      next()
+    } else {
+      res.json({ message: 'No Key' })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}, async (req: Request, res: Response) => {
+  try {
+    const { email, password } = req.body
+
+    const user = await prisma.user.findUnique({
+      where: {
+        email: email
+      }
+    })
+
+    if (user) {
+      const decode = bcypt_password.compare_password(String(user?.password), password)
+      console.log(decode)
+      const token_data = encode(
+        {
+          fname: user.fname,
+          email: user.email,
+          lname: user.lname,
+          id: user.id,
+        }
+      )
+      res.status(200).json({ token_data })
+      return
+    }
+    res.status(200).json({ token:null })
+
+  } catch (error) {
+    console.log(error)
+    res.json({ message: 'Error' })
+  }
+})
+
+
+
 app.post('/gentoken', (req: Request, res: Response, next: NextFunction) => {
   try {
     const { api_key } = req.headers
@@ -116,11 +161,11 @@ app.post('/gentoken', (req: Request, res: Response, next: NextFunction) => {
   }
 }, async (req: Request, res: Response) => {
   try {
-    const {is_token} = req.body
-    if(is_token==null) return
+    const { is_token } = req.body
+    if (is_token == null) return
     console.log(is_token)
 
-    const token =await decode(is_token)
+    const token = await decode(is_token)
     console.log(token)
 
     res.status(200).json(token)
