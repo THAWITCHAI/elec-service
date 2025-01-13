@@ -121,22 +121,9 @@ app.post('/gentoken', (req: Request, res: Response, next: NextFunction) => {
     console.log(is_token)
 
     const token =await decode(is_token)
-    // console.log(token)
+    console.log(token)
 
-
-    // const user = await prisma.user.findMany()
-    // console.log(user)
-
-    // const token_data = encode(
-    //   {
-    //     fname: user.fname,
-    //     email: user.email,
-    //     lname: user.lname,
-    //     id: user.id,
-    //   }
-    // )
-
-    res.status(200).json({ token })
+    res.status(200).json(token)
   } catch (error) {
     console.log(error)
     res.json({ message: 'Error' })
