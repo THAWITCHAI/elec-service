@@ -36,6 +36,39 @@ app.get("/electric", (req: Request, res: Response, next: NextFunction) => {
     })
   }
 });
+
+
+app.post('/electric', (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { api_key } = req.headers
+    if (api_key === '1234') {
+      next()
+    } else {
+      res.json({ message: 'No Key' })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}, async (req: Request, res: Response) => {
+  console.log(2)
+  try {
+    const { before, after } = req.body
+    const electric = await prisma.electric.create({
+      data: {
+        after: Number(after),
+        before: Number(before)
+      }
+    })
+    res.json(electric)
+
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      message: "Error For Create Eelectric"
+    })
+  }
+}
+)
 app.get("/user", (req: Request, res: Response, next: NextFunction) => {
   try {
     const { api_key } = req.headers
@@ -138,7 +171,7 @@ app.post('/login', (req: Request, res: Response, next: NextFunction) => {
       res.status(200).json({ token_data })
       return
     }
-    res.status(200).json({ token:null })
+    res.status(200).json({ token: null })
 
   } catch (error) {
     console.log(error)
